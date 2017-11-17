@@ -1,4 +1,4 @@
-var words = ["Clint" , "Spaghetti" , "Badge" , "Cactus" , "Saloon" , "Duel" , "Cassidy" , "Outlaw" , "Maverick" , "Revolver"]
+var words = ["clint" , "spaghetti" , "badge" , "cactus" , "saloon" , "duel" , "cassidy" , "outlaw" , "maverick" , "revolver"]
 var guess = [];
 var guessesUsed =0;
 var wordLetters = [];
@@ -6,85 +6,64 @@ var guessWord = [];
 var guesses = 7;
 var wins = 0;
 var losses = 0;
+var wrongLetters = [];
+
+
 
 
 
 
 	
    function randWord() {
-	var guessWord = words[Math.floor(Math.random() * words.length)];
-	var wordLetters = guessWord.split("");
+	 guessWord = words[Math.floor(Math.random() * words.length)];
+	 wordLetters = guessWord.split("");
+	 console.log("wordLetters.length" + wordLetters.length);
 	console.log(guessWord);
 	 console.log(wordLetters);
 	 for(var i=0; i<wordLetters.length; i++){
-	guess.push("");
+	guess.push("_");
 
 	}
 
 
 	}
 
-	console.log(randWord());
+	randWord();
 	console.log(guess);
 
 
 // I can't get the user key to populate the empty array 
-document.onkeyup = function compareWord(event) {
+document.onkeypress = function compareWord(event) {
+	//if(event.key>=48 && event.key<=90){
+    
 	var letterGuess = event.key;   // dont think I need this and if I keep it should event.key be replaced with wordLetters on  lines 31 and 32?
 	console.log(event.key);
 	console.log(letterGuess);
-
+     console.log(wordLetters.length);
+// }
 	for(var i = 0; i < wordLetters.length; i++){
+		console.log("hello");
 		if (wordLetters[i] === letterGuess){
 			console.log("inside if statement");
-			guess.push(letterGuess);
+			guess[i] = letterGuess;
+            console.log("guess: " + guess);
+            document.getElementById("rightGuesses").innerHTML = guess.join("");
+
+            
+			
+               
 		}
-	}
-}
-	// //for(var i=0; i<guesses; i++){
-	// 	if(wordLetters === letterGuess ) {
-	// 	// rightGuessCount++;
-	// 		(guess = letterGuess) ; 
-	// 	 	console.log(guess); 
-	// 	} // end if
-	// 	else {
-	// 		guessesUsed--;
-	// 	}
-	// //} // end for loop
-	
-/*    
-	console.log(guess);
+       // running through the whole string taking away a guess on every letter. 
+			//even correct ones if they are not correct in every spot...which they wouldnt be
+		else {                              
+			wrongLetters.push(event.key);
+			guesses --;
+			console.log("these letters are wrong: " + wrongLetters);
+			console.log("remaining guesses: " + guesses);
+		}
 
-	function winLose() {
-
-		if(guess === wordLetters){
-			wins++;
-				alert("You've won")
-			}
-		
-	  else  {
-	  	 losses++;
-	  	alert("Sorry, maybe next time";)
-	  }
 
 	}
 
-
-	
- function reset() {
-
-var guess = [];
-var guessesUsed =0;
-var wordLetters = [];
-var guessWord = [];
-var guesses = 7;
-
-
-
-
 }
 
-ducumnet.onkeydown = function startGame(){
-	reset(); = event.key;
-	randWord(); = event.key;
-}*/
